@@ -1,0 +1,8 @@
+{
+  "name": "श्री १००८ नवचेतना शिव शक्ति - Shri 1008 Nav Chetna Shiv Shakti",
+  "description": "श्री १००८ नवचेतना शिव शक्ति मंदिर की आधिकारिक वेबसाइट। दैनिक दर्शन, महाआरती समय, आराध्य देव, उत्सव, ऑनलाइन दान एवं ई-पूजा संकल्प।",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
