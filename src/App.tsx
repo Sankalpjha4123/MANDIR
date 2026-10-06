@@ -13,6 +13,7 @@ import { WelcomeSection } from './components/WelcomeSection';
 import { DeitiesSanctum } from './components/DeitiesSanctum';
 import { DarshanSchedule } from './components/DarshanSchedule';
 import { EventsAndFestivals } from './components/EventsAndFestivals';
+import { TempleUpdatesBlog } from './components/TempleUpdatesBlog';
 import { GallerySection } from './components/GallerySection';
 import { SevaAndDonation } from './components/SevaAndDonation';
 import { AboutSection } from './components/AboutSection';
@@ -128,6 +129,9 @@ export default function App() {
               onDonateForEvent={() => setCurrentTab('donation')}
             />
 
+            {/* Temple Updates, Historical Facts & Spiritual Blog */}
+            <TempleUpdatesBlog lang={lang} />
+
             {/* Dedicated Seva & Donation Strip with SBI QR Code (Image 9) */}
             <SevaAndDonation lang={lang} />
 
@@ -171,6 +175,12 @@ export default function App() {
               lang={lang}
               onDonateForEvent={() => setCurrentTab('donation')}
             />
+          </div>
+        )}
+
+        {currentTab === 'updates' && (
+          <div className="pt-4">
+            <TempleUpdatesBlog lang={lang} />
           </div>
         )}
 
@@ -245,6 +255,7 @@ export default function App() {
         isOpen={userProfileOpen}
         onClose={() => setUserProfileOpen(false)}
         lang={lang}
+        onNavigateToDonation={() => setCurrentTab('donation')}
       />
 
       {/* Trust Admin Portal Modal */}

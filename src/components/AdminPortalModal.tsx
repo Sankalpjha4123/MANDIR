@@ -9,10 +9,11 @@ interface AdminPortalModalProps {
 
 export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onClose, lang }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'donations' | 'passes' | 'yajmans'>('donations');
+  const [activeTab, setActiveTab] = useState<'donations' | 'passes' | 'yajmans' | 'articles'>('donations');
   const [donations, setDonations] = useState<any[]>([]);
   const [passes, setPasses] = useState<any[]>([]);
   const [yajmans, setYajmans] = useState<any[]>([]);
+  const [articles, setArticles] = useState<any[]>([]);
 
   useEffect(() => {
     if (isOpen) {
@@ -20,6 +21,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
         const d = JSON.parse(localStorage.getItem('mandir_donation_receipts') || '[]');
         const p = JSON.parse(localStorage.getItem('mandir_darshan_passes') || '[]');
         const y = JSON.parse(localStorage.getItem('mandir_yajman_registrations') || '[]');
+        const a = JSON.parse(localStorage.getItem('mandir_blog_articles') || '[]');
+        setArticles(a);
 
         // Seed demo records if empty for rich showcase
         if (d.length === 0) {
@@ -224,6 +227,15 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
             >
               यजमान सूची ({yajmans.length})
             </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('articles')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                activeTab === 'articles' ? 'bg-[#9d2f00] text-white shadow-sm' : 'bg-white text-[#5a4139] border border-[#ffe9e2]'
+              }`}
+            >
+              समाचार व लेख ({articles.length})
+            </button>
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -330,6 +342,62 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({ isOpen, onCl
                   </span>
                 </div>
               ))}
+            </div>
+          )}
+
+          {activeTab === 'articles' && (
+            <div className="space-y-3">
+              {articles.length === 0 ? (
+                <div className="text-center py-12 text-[#8e7167]">
+                  <p className="text-xs">कोई लेख या समाचार नहीं मिला।</p>
+                </div>
+              ) : (
+                articles.map((art, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white p-4 rounded-2xl border border-[#ffe9e2] flex items-center justify-between shadow-sm gap-3"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] bg-[#fff1ec] text-[#9d2f00] font-bold px-2 py-0.5 rounded-full">
+                          {art.category === 'event' ? 'उत्सव' : art.category === 'spiritual' ? 'आध्यात्मिक' : art.category === 'history' ? 'इतिहास' : 'सेवा'}
+                        </span>
+                        <span className="text-[11px] text-[#8e7167] font-medium">{art.date}</span>
+                        {art.isPinned && (
+                          <span className="text-[10px] bg-[#ffdea3] text-[#390c00] font-bold px-1.5 py-0.2 rounded">
+                            पिन किया गया
+                          </span>
+                        )}
+                      </div>
+                      <h5 className="font-serif text-sm font-bold text-[#2a170f]">
+                        {art.titleHi}
+                      </h5>
+                      <p className="text-xs text-[#5a4139] mt-0.5 line-clamp-1">
+                        {art.summaryHi}
+                      </p>
+                      <span className="text-[11px] text-[#705100] font-semibold">
+                        लेखक: {art.authorHi}
+                      </span>
+                    </div>
+
+                    <div className="shrink-0 flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (window.confirm('क्या आप इस लेख को हटाना चाहते हैं?')) {
+                            const updated = articles.filter((a) => a.id !== art.id);
+                            setArticles(updated);
+                            localStorage.setItem('mandir_blog_articles', JSON.stringify(updated));
+                          }
+                        }}
+                        className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl text-xs font-bold transition-all border border-red-200"
+                      >
+                        हटाएं
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           )}
         </div>

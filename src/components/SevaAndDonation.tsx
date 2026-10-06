@@ -20,6 +20,7 @@ export interface DonationReceipt {
   purpose: string;
   utrNo: string;
   paymentMode: string;
+  status?: 'Verified' | 'Completed' | 'Pending' | 'Success';
 }
 
 export const SevaAndDonation: React.FC<SevaAndDonationProps> = ({ lang }) => {
@@ -75,6 +76,7 @@ export const SevaAndDonation: React.FC<SevaAndDonationProps> = ({ lang }) => {
       purpose,
       utrNo: utrNo || `SBI${Math.floor(100000000000 + Math.random() * 900000000000)}`,
       paymentMode: 'UPI / SBI Payments',
+      status: 'Verified',
     };
 
     setReceipt(newReceipt);

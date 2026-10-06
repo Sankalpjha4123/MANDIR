@@ -31,6 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'deities', labelHi: 'आराध्य देव', labelEn: 'Deities Sanctum' },
     { id: 'darshan', labelHi: 'दर्शन व आरती', labelEn: 'Darshan & Aarti' },
     { id: 'festivals', labelHi: 'उत्सव व कार्यक्रम', labelEn: 'Events & Festivals' },
+    { id: 'updates', labelHi: 'समाचार व विचार', labelEn: 'Blog & Updates' },
     { id: 'gallery', labelHi: 'छायाचित्र', labelEn: 'Gallery' },
     { id: 'donation', labelHi: 'सेवा एवं दान', labelEn: 'Seva & Donation' },
     { id: 'contact', labelHi: 'स्थान व संपर्क', labelEn: 'Location & Contact' },

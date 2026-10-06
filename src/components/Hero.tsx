@@ -1,5 +1,6 @@
 import React from 'react';
 import { TEMPLE_INFO } from '../data/templeData';
+import { InteractiveDiya } from './InteractiveDiya';
 
 interface HeroProps {
   setCurrentTab: (tab: string) => void;
@@ -65,11 +66,14 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentTab, lang, onOpenLiveDarsh
         </h1>
 
         {/* Devotional Subtitle */}
-        <p className="text-base sm:text-lg lg:text-xl text-[#ffdbce] max-w-2xl font-normal leading-relaxed mb-8 drop-shadow">
+        <p className="text-base sm:text-lg lg:text-xl text-[#ffdbce] max-w-2xl font-normal leading-relaxed mb-4 drop-shadow">
           {lang === 'hi'
             ? 'एक पवित्र स्थान, जहाँ आस्था, शांति और भक्ति का पावन संगम होता है। अनुभव करें वैदिक ऋचाओं का दिव्य सानिध्य और अलौकिक आध्यात्मिक शांति।'
             : 'A sacred threshold where faith, tranquility, and devotion unite. Immerse yourself in authentic Vedic resonance and timeless spiritual peace.'}
         </p>
+
+        {/* Interactive Light a Diya Altar (Persists for session) */}
+        <InteractiveDiya lang={lang} />
 
         {/* Action Button Group */}
         <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8">
